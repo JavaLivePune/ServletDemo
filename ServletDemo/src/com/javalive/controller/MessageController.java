@@ -32,6 +32,13 @@ public class MessageController extends HttpServlet {
 		System.out.println("Getting bussiness logic content from WelcomeMessage.java file....");
 		WelcomeMessage file=new WelcomeMessage();
 		System.out.println("Message from WelcomeMessge.java is "+file.getMessage());
+		
+		//***Please note that if we uncomment following code snippet, it results in raising IllegatStateException in the application
+		//as we are using forward methods more than once firstly in following code and secondly in ServletLifeCycleController servlet
+		//again (to forward to AccountController servlet). This phenomenon underlines working of RequsetDeispatchers forward() method.
+		
+		System.out.println("Now we are going to call forward() method of RequestDispatcher class from this MessageController servlet to WelcomeJSP..."
+				+ "\nPlease see web browser output......"); 
 		javax.servlet.RequestDispatcher dispatcher1 = request.getRequestDispatcher("/WelcomeJSP.jsp");//WelcomeJSP.jsp");
 		dispatcher1.forward(request, response);
 	}
